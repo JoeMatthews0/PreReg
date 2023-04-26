@@ -627,8 +627,10 @@ server <- function(input, output, session) {
   compulsory <- reactive({
     cc = NULL
     compCode = "Misc"
-    if(input$Stage == 3 & input$Programme %in% c('BMath', 'MMath', 'BMaS', 'MMaS', 'BStat')){
+    if(input$Stage == 3 & input$Programme %in% c('BMath', 'MMath', 'BMaS', 'BStat')){
       compCode = "SH"
+    } else if(input$Stage == 3 & input$Programme == 'MMaS'){
+      compCode = c("SH", "GGC3")
     } else if(input$Stage == 4 & input$Programme == 'MMath'){
       if(input$Special == 'P'){
         compCode = "PU"
@@ -784,8 +786,10 @@ server <- function(input, output, session) {
   nForbidden = reactive({
     cc = NULL
     compCode = "Misc"
-    if(input$Stage == 3 & input$Programme %in% c('BMath', 'MMath', 'BMaS', 'MMaS', 'BStat')){
+    if(input$Stage == 3 & input$Programme %in% c('BMath', 'MMath', 'BMaS', 'BStat')){
       compCode = "SH"
+    } else if(input$Stage == 3 & input$Programme == 'MMaS'){
+      compCode = c("SH", "GGC3")
     } else if(input$Stage == 4 & input$Programme == 'MMath'){
       if(input$Special == 'P'){
         compCode = "PU"
@@ -1036,10 +1040,7 @@ server <- function(input, output, session) {
   })
   
   output$stageClash <- renderText({
-    stages = vector()
-    for(i in 1 : length(uniqueChosen()$Code)){
-      stages[i] = substr(uniqueChosen()$Code[i], 4, 4)
-    }
+    stages = uniqueChosen()$Stage %>% unique
     if(length(unique(stages)) > 1){
       paste("<span style=\"color:#E28A1A;font-size:18px\">Warning: You have selected modules across multiple stages. Stages selected: ", paste(unique(stages), collapse = ", "), 
             ".<br>Please check for typos in your module codes! </span>")
