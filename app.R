@@ -242,7 +242,7 @@ ui <- dashboardPage(
                                                   )
                                                 )
                                ),
-                               conditionalPanel(condition = "input.Stage == 3",
+                               conditionalPanel(condition = "input.Stage == 3 & !(input.Programme == 'MwF' || input.Programme == 'MwB')",
                                                 fluidRow(column(6,
                                                                 checkboxGroupInput("C", label = "Careers", 
                                                                                    choices = mods$Module)
@@ -455,9 +455,7 @@ server <- function(input, output, session) {
         txt = "As part of the requirements for the G1N3 BSc Mathematics with Finance degree in Stage 2:
           <ul>
           <li> You must take ACC2000 Interpreting Company Accounts, ACC2007 Corporate Finance, MAS2901 Introduction to Statistical Inference and MAS2902 Stochastic Modelling. </li>
-          <li> You must choose a primary pathway (Pure, Applied or Statistics). You will take 40 credits of modules from this pathway in Stage 2,
-        and will only be able to take modules from your chosen section in Stage 3 for the maths half of your degree 
-        (e.g. if you choose Applied as your primary pathway, you will only be able to take Applied modules in stage 3, and won't be able to take Pure or Statistics modules). </li>
+          <li> You must choose a primary pathway (Pure, Applied or Statistics). You will take 40 credits of modules from this pathway in Stage 2, but won't affect your Stage 3 choices. </li>
           <li> If you choose a Statistics pathway, you will split the remaining 40 credits between Pure and Applied modules (in either a 40:0, 20:20 or 0:40 split). </li>
           <li> If you choose a Pure or Applied pathway, you will choose a secondary pathway from the options you didn't select (e.g. if you chose a Pure pathway, you will choose either 
           an Applied or Statistics secondary pathway) which will contribute 40 credits of modules to your Stage 2 selection, but won't affect your Stage 3 choices. </li>
@@ -1364,7 +1362,7 @@ server <- function(input, output, session) {
         } else if(mathsCreds < 40){
           txt = paste0("<span style=\"color:#E28A1A;font-size:18px\">", txt, "
           Based on your choices you would be unable to graduate with a BSc Mathematics and Statistics degree, and would need to switch to BSc Statistics. <br>
-                 To remain on the BSc Mathematics and Statistics programme, you must select at least 60 credits of pure or applied modules (currently ", mathsCreds, ").</span>")
+                 To remain on the BSc Mathematics and Statistics programme, you must select at least 40 credits of pure or applied modules (currently ", mathsCreds, ").</span>")
         } else if(statsCreds < 40){
           txt = paste0("<span style=\"color:#E28A1A;font-size:18px\">", txt, "
           Based on your choices you would be unable to graduate with a BSc Mathematics and Statistics degree, and would need to switch to BSc Mathematics. <br>
