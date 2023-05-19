@@ -253,12 +253,13 @@ ui <- dashboardPage(
                                                 )
                                ),
                 p(""),
-                               p("Alternatively copy and paste your selection here"),
-                               textInput("textModules", "Enter your module choices, separated by spaces"),
+                               
                                htmlOutput("dupWarning"),
                                htmlOutput("invalidWarning"),
                                htmlOutput("stageClash")
                                ),
+              p("Alternatively copy and paste your selection here"),
+              textInput("textModules", "Enter your module choices, separated by spaces"),
               h2("Your Selection"),
               p("Your current module selection is"),
               # Display chosen module summaries
