@@ -650,11 +650,19 @@ server <- function(input, output, session) {
       if(input$Stage == 2 && input$Programme %in% c('MaE', 'MaA', 'MwF')){
         if(input$Programme == 'MwF' & input$JHPathway == 'S'){
           if(input$MwFStats == 'P'){
-            cc = c(cc, "MWFSP")
+            cc = c(cc, "PJH")
           } else if(input$MwFStats == 'PA'){
             cc = c(cc, "MWFSB")
           } else if(input$MwFStats == 'A'){
-            cc = c(cc, "MWFSA")
+            cc = c(cc, "AJH")
+          }
+        } else if(input$Programme == 'MwF'){
+          if(input$JHPathway2 == 'Pure'){
+            cc = c(cc, "P2JH")
+          } else if(input$JHPathway2 == 'Applied'){
+            cc = c(cc, "A2JH")
+          } else if(input$JHPathway2 == 'Statistics'){
+            cc = c(cc, "SJH")
           }
         } else{
           if(input$JHPathway2 == 'Pure'){
@@ -675,15 +683,15 @@ server <- function(input, output, session) {
       }
       if(input$Stage == 2 && input$Programme == "MwB"){
         if(input$MwBPath == 'Pure'){
-          cc = c(cc, "MWBJP")
+          cc = c(cc, "PJH")
         } else if(input$MwBPath == 'Pure and Applied'){
           cc = c(cc, "MWBPA")
         } else if(input$MwBPath == 'Applied'){
-          cc = c(cc, "MWBJA")
+          cc = c(cc, "AJH")
         } else if(input$MwBPath == 'Applied and Statistics'){
           cc = c(cc, "MWBAS")
         } else if(input$MwBPath == 'Statistics'){
-          cc = c(cc, "MWBJS")
+          cc = c(cc, "SJH")
         } else if(input$MwBPath == 'Pure and Statistics'){
           cc = c(cc, "MWBPS")
         }
